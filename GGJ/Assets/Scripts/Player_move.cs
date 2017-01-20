@@ -5,12 +5,10 @@ using UnityEngine;
 public class Player_move : MonoBehaviour {
 
 	public Transform trans;
-	public float speed;
+	public float speed = 90.0f;
 	// Use this for initialization
 	void Start () {
 		trans = this.GetComponent<Transform>();
-		speed = 150.0f;
-
 	}
 
 	// Update is called once per frame
