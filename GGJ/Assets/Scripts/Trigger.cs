@@ -14,7 +14,7 @@ public class Trigger : MonoBehaviour {
 	}
 
 	private void kill(){
-		Debug.Log ("kill");
+		Debug.Log ("kill");	
 		Destroy(this.gameObject);
 	}
 
