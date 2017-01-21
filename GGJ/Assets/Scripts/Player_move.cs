@@ -29,7 +29,7 @@ public class Player_move : MonoBehaviour {
 		if(endurance == 100) {
 			can_leap = true;
 		}
-		if(Input.GetKey(KeyCode.LeftShift) && can_leap) {
+		if(Input.GetKey(KeyCode.Space) && can_leap) {
 			endurance -= endu_decay;
 			if(endurance <= endu_decay) {
 				can_leap = false;
@@ -50,9 +50,13 @@ public class Player_move : MonoBehaviour {
 	}
 
 	public void OnTriggerEnter(Collider col){
-		if (col.gameObject.tag == "Guard" && Input.GetKey(KeyCode.LeftShift) && can_leap) {
+		if (col.gameObject.tag == "Guard" && Input.GetKey(KeyCode.Space) && can_leap) {
 			col.gameObject.SendMessage ("kill");
 			Debug.Log("Killed some1 ! Mwehehe !");
 		}
+	}
+
+	public void kill() {
+		//Destroy(gameObject);
 	}
 }
