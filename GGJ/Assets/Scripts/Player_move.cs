@@ -11,9 +11,15 @@ public class Player_move : MonoBehaviour {
 	public bool can_leap = true;
 	public int endu_decay = 5;
 	public int endu_regen = 1;
+	CharacterController cController;
+	Vector3 vecAccel;
+
 	// Use this for initialization
 	void Start () {
 		trans = this.GetComponent<Transform>();
+		cController = GetComponent<CharacterController> ();
+		vecAccel = new Vector3();
+
 	}
 
 	// Update is called once per frame
@@ -28,17 +34,25 @@ public class Player_move : MonoBehaviour {
 			if(endurance <= endu_decay) {
 				can_leap = false;
 			}
-			x = Input.GetAxis("Horizontal") * Time.deltaTime * leap_speed;
-			y = Input.GetAxis("Vertical") * Time.deltaTime * leap_speed;
+			vecAccel.x = Input.GetAxis("Horizontal") * Time.deltaTime * leap_speed;
+			vecAccel.z = Input.GetAxis("Vertical") * Time.deltaTime * leap_speed;
 		}
 		else {
 			if(endurance < 100) {
 				endurance += endu_regen;
 			}
-			x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-			y = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+			vecAccel.x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+			vecAccel.z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 		}
 
-		transform.Translate(x, 0, y);
+		//Debug.Log(vecAccel);
+		cController.SimpleMove(vecAccel);
+	}
+
+	public void OnTriggerEnter(Collider col){
+		if (col.gameObject.tag == "Guard" && Input.GetKey(KeyCode.LeftShift) && can_leap) {
+			col.gameObject.SendMessage ("kill");
+			Debug.Log("Killed some1 ! Mwehehe !");
+		}
 	}
 }
