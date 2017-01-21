@@ -7,14 +7,16 @@ using UnityEngine.AI;
 public class Patrol_random : MonoBehaviour {
 
    public Transform[] points;
+   private Transform player;
    private int destPoint = 0;
    private NavMeshAgent agent;
    private Vector3 lastAgentVelocity;
    private NavMeshPath lastAgentPath;
    public float timeToPause = 2;
-   private float curTime = 0;
+   public float curTime = 0;
    void Start () {
 	   agent = GetComponent<NavMeshAgent>();
+       player = GameObject.Find("Joueur").transform.GetChild(0).transform;
 
 	   // Disabling auto-braking allows for continuous movement
 	   // between points (ie, the agent doesn't slow down as it
@@ -44,7 +46,7 @@ public class Patrol_random : MonoBehaviour {
    void Update () {
 	   // Choose the next destination point when the agent gets
 	   // close to the current one.
-	   if (agent.remainingDistance < 0.5f) {
+	   if (agent.remainingDistance < 0.1f) {
 		   if(curTime == 0) {
 			   agent.Stop();
 			   curTime = Time.time;
@@ -71,5 +73,11 @@ public class Patrol_random : MonoBehaviour {
      void resume() {
          agent.velocity = lastAgentVelocity;
          agent.SetPath(lastAgentPath);
+     }
+
+     public void Alert() {
+         agent.Resume();
+         agent.destination = player.position;
+
      }
 }

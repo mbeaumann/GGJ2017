@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 
 
 	public void kill(){
-		Debug.Log ("Mort");
+		Destroy (this.gameObject);
 	}
 
 }

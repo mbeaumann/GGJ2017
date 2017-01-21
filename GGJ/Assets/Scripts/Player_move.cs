@@ -11,6 +11,7 @@ public class Player_move : MonoBehaviour {
 	public bool can_leap = true;
 	public int endu_decay = 5;
 	public int endu_regen = 1;
+	public float radius = 3;
 	CharacterController cController;
 	Vector3 vecAccel;
 
@@ -30,6 +31,7 @@ public class Player_move : MonoBehaviour {
 			can_leap = true;
 		}
 		if(Input.GetKey(KeyCode.Space) && can_leap) {
+			emit_sound();
 			endurance -= endu_decay;
 			if(endurance <= endu_decay) {
 				can_leap = false;
@@ -56,6 +58,15 @@ public class Player_move : MonoBehaviour {
 		}
 	}
 
+	public void emit_sound() {
+		Collider[] cols = Physics.OverlapSphere(transform.position, radius);
+		foreach(Collider col in cols) {
+			if(col.gameObject.tag == "Guard") {
+				col.gameObject.SendMessage("Alert");
+				Debug.Log("Alerted " + col.gameObject.name);
+			}
+		}
+	}
 	public void kill() {
 		//Destroy(gameObject);
 	}
