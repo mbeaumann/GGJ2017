@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_move : MonoBehaviour {
 
@@ -25,8 +26,6 @@ public class Player_move : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		float x;
-		float y;
 		if(endurance == 100) {
 			can_leap = true;
 		}
@@ -49,6 +48,7 @@ public class Player_move : MonoBehaviour {
 
 		//Debug.Log(vecAccel);
 		cController.SimpleMove(vecAccel);
+		transform.rotation = Quaternion.LookRotation(vecAccel, Vector3.up);
 	}
 
 	public void OnTriggerEnter(Collider col){
@@ -68,6 +68,7 @@ public class Player_move : MonoBehaviour {
 		}
 	}
 	public void kill() {
-		//Destroy(gameObject);
+		SceneManager.LoadScene (2);
+		Destroy(gameObject);
 	}
 }

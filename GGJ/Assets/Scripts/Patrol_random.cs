@@ -13,16 +13,23 @@ public class Patrol_random : MonoBehaviour {
    private Vector3 lastAgentVelocity;
    private NavMeshPath lastAgentPath;
    public float timeToPause = 2;
-   public float curTime = 0;
-   void Start () {
+   private float curTime = 0;
+  
+	void Awake () {
 	   agent = GetComponent<NavMeshAgent>();
-       player = GameObject.Find("Joueur").transform.GetChild(0).transform;
+       player = GameObject.Find("Joueur").transform;
 
 	   // Disabling auto-braking allows for continuous movement
 	   // between points (ie, the agent doesn't slow down as it
 	   // approaches a destination point).
-	   agent.autoBraking = false;
-
+		agent.autoBraking = false;
+		destPoint = (int)Random.Range (0, points.Length);
+		GameObject[] tmps = GameObject.FindGameObjectsWithTag ("Finish");
+		int i = 0;
+		foreach(GameObject tmp in tmps){
+			points[i] = tmp.transform;
+			i++;
+		}
 	   GotoNextPoint();
    }
 
@@ -46,7 +53,7 @@ public class Patrol_random : MonoBehaviour {
    void Update () {
 	   // Choose the next destination point when the agent gets
 	   // close to the current one.
-	   if (agent.remainingDistance < 0.1f) {
+	   if (agent.remainingDistance < 0.5f) {
 		   if(curTime == 0) {
 			   agent.Stop();
 			   curTime = Time.time;
@@ -76,8 +83,8 @@ public class Patrol_random : MonoBehaviour {
      }
 
      public void Alert() {
-         agent.Resume();
-         agent.destination = player.position;
-
+		Debug.Log (player.position);
+        agent.Resume();
+		agent.SetDestination(player.position);
      }
 }
