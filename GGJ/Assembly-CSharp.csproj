@@ -48,6 +48,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Mob_horizontal_patrol.cs" />
      <Compile Include="Assets\Scripts\Mob_vertical_patrol.cs" />
+     <Compile Include="Assets\Scripts\Patrol.cs" />
+     <Compile Include="Assets\Scripts\Patrol_random.cs" />
+     <Compile Include="Assets\Scripts\Patrol_wait.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Player_move.cs" />
      <Compile Include="Assets\Scripts\Torch.cs" />
