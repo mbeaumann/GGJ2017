@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Trigger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Torch.cs">
     <Files>
-      <File FileName="Assets\Scripts\Trigger.cs" Line="9" Column="27" />
+      <File FileName="Assets\Scripts\Trigger.cs" Line="10" Column="1" />
+      <File FileName="Assets\Scripts\Torch.cs" Line="10" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
